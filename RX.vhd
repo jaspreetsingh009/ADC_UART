@@ -8,7 +8,7 @@ generic(
 );
 port (	
 	CLK       : IN  STD_LOGIC;
-	RST		  : IN  STD_LOGIC;
+	RST       : IN  STD_LOGIC;
 	RX_LINE   : IN  STD_LOGIC;
 	RX_STATUS : OUT STD_LOGIC;
 	RX_DATA   : OUT STD_LOGIC_VECTOR(7 downto 0)
@@ -37,7 +37,7 @@ begin
 		PRSCL_TICK 	 <=   0;
 		INDEX    	 <=   0;
 		RX_FLAG    	 <=  '0';
-		RX_DATA_BUF  <=  (others => '0');
+		RX_DATA_BUF  	 <=  (others => '0');
 		
 		
 	elsif(rising_edge(CLK)) then
@@ -47,9 +47,9 @@ begin
 	
 		if(RX_FLAG = '0' AND  RX_LINE = '0') 
 		then 
-			INDEX  		<=  0; 
+			INDEX  	    <=  0; 
 			PRSCL_TICK  <=  0; 
-			RX_FLAG  	<= '1';
+			RX_FLAG     <= '1';
 			RX_DATA_BUF <= (others => '0');
 		end if;
 	 
@@ -71,18 +71,18 @@ begin
 		  
 		   if(PRSCL_TICK = PRSCL/2) 
 		   then
-				 if(INDEX < 9) then
-						INDEX   <=  INDEX + 1;
-				 else	 
-						if(RX_DATA_BUF(0) = '0' and RX_DATA_BUF(9) = '1') 
-						then
-							RX_DATA <= RX_DATA_BUF(8 DOWNTO 1);	
-						else 
-							RX_DATA <= (others => '0');
-						end if;
-						
-						RX_FLAG <= '0';
-				 end if;
+			 if(INDEX < 9) then
+				INDEX   <=  INDEX + 1;
+			 else	 
+				if(RX_DATA_BUF(0) = '0' and RX_DATA_BUF(9) = '1') 
+				then
+					RX_DATA <= RX_DATA_BUF(8 DOWNTO 1);	
+				else 
+					RX_DATA <= (others => '0');
+				end if;
+
+				RX_FLAG <= '0';
+			 end if;
 		   
 		   end if;  
 		  
