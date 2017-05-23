@@ -25,20 +25,17 @@ signal TX_DATA_BUF	:  STD_LOGIC_VECTOR(9 DOWNTO 0);
 
 begin
 
-
 TX_READY <= not TX_FLAG;
 
-
 ---------------------------------------------------------
---- 				TX Data Transmit 				  ---
+--- 	          TX Data Transmit 		      ---
 ---------------------------------------------------------
 							 
 TX_PROCESS : PROCESS(CLK) is
 begin
 
 	if(rising_edge(CLK)) then
-		
-		
+				
 		--- Wait for Transmit Trigger ---
 
 		if(TX_FLAG = '0' and TX_START = '1') 
@@ -50,12 +47,10 @@ begin
 			TX_DATA_BUF(8 DOWNTO 1) <= TX_DATA;
 		end if;
 	 
-	 
 		--- Transmit TX Data ---
 	 
 		if(TX_FLAG = '1') 
-		then
-			
+		then			
 			if(PRSCL_TICK < PRSCL) 
 			then 
 				PRSCL_TICK <= PRSCL_TICK + 1;
