@@ -27,21 +27,20 @@ architecture ADC_UART_ARC of ADC_UART is
 type BUFFER_DATAS is array (7 DOWNTO 0) of INTEGER RANGE 0 TO 4095;
 signal ADC_BUF_CH : BUFFER_DATAS;
 
-signal TX_DATA_BUF   : STD_LOGIC_VECTOR(7 DOWNTO 0);
-signal RX_DATA_BUF   : STD_LOGIC_VECTOR(7 DOWNTO 0);
-signal TX_READY_BUF  : STD_LOGIC;
-signal TX_START_BUF  : STD_LOGIC;
-signal RX_STATUS_BUF : STD_LOGIC;
-signal TEST_OUT_BUF  : STD_LOGIC;
+signal TX_DATA_BUF    :  STD_LOGIC_VECTOR(7 DOWNTO 0);
+signal RX_DATA_BUF    :  STD_LOGIC_VECTOR(7 DOWNTO 0);
+signal TX_READY_BUF   :  STD_LOGIC;
+signal TX_START_BUF   :  STD_LOGIC;
+signal RX_STATUS_BUF  :  STD_LOGIC;
+signal TEST_OUT_BUF   :  STD_LOGIC;
 
 begin						  
 
-	RX_DATA 	  <=  RX_DATA_BUF;
+	RX_DATA    <=  RX_DATA_BUF;
 	TEST_OUT   <=  TEST_OUT_BUF;
 
 	ADC_8CH : entity work.ADC
-    	port map( 	
-			CLK         =>  CLK,
+    	port map( 	CLK         =>  CLK,
 			oDIN        =>  oDIN,
 			oCS_n       =>  oCS_n,
 			oSCLK       =>  oSCLK,
