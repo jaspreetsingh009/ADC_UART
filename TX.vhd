@@ -4,7 +4,7 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity TX is
 generic(
-	PRSCL	   : INTEGER := 5207  
+	PRSCL	 : INTEGER := 5207  
 );
 port (	
 	CLK      : IN  STD_LOGIC;
@@ -40,14 +40,14 @@ begin
 		
 		
 		--- Wait for Transmit Trigger ---
-		
+
 		if(TX_FLAG = '0' and TX_START = '1') 
 		then 
-				TX_FLAG  		 <=  '1'; 
-				INDEX    		 <=   0;
-				TX_DATA_BUF(0)  <=  '0'; 
-				TX_DATA_BUF(9)  <=  '1'; 
-				TX_DATA_BUF(8 DOWNTO 1) <= TX_DATA;
+			TX_FLAG  		 <=  '1'; 
+			INDEX    		 <=   0;
+			TX_DATA_BUF(0)  <=  '0'; 
+			TX_DATA_BUF(9)  <=  '1'; 
+			TX_DATA_BUF(8 DOWNTO 1) <= TX_DATA;
 		end if;
 	 
 	 
@@ -65,20 +65,18 @@ begin
 			
 			
 			if(PRSCL_TICK = PRSCL/2) 
-		    then			
-				 TX_LINE <= TX_DATA_BUF(INDEX);
-				 
-				 if(INDEX < 9) then
-						INDEX   <=  INDEX + 1;
-				 else
-						TX_FLAG  <= '0';
-				 end if;		 
-		    
-		    end if;  
-	 
+		    	then			
+				TX_LINE <= TX_DATA_BUF(INDEX);
+
+				if(INDEX < 9) then
+				      INDEX   <=  INDEX + 1;
+				else
+				      TX_FLAG  <= '0';
+				end if;		 
+		   	 end if;  	 
 		end if;	
-	
-	end if;
+			
+	end if;  -- rising_edge if end --
 
 end process TX_PROCESS;
 
